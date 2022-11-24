@@ -63,7 +63,7 @@ MYSQLND_DESC=	Build with MySQL Native Driver
 LINKTHR_DESC=	Link thread lib (for threaded extensions)
 ZTS_DESC=	Force Zend Thread Safety (ZTS) build
 
-CONFLICTS=	php74 php80
+CONFLICTS=	php72 php74 php80 php81
 
 DESTDIRNAME=	INSTALL_ROOT
 
