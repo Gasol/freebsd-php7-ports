@@ -93,6 +93,7 @@ USES+=		ssl
 .endif
 
 .if ${PHP_MODNAME} == "gd"
+BUILD_DEPENDS=	pkg-config:devel/pkgconf
 LIB_DEPENDS=	libfreetype.so:print/freetype2 \
 		libpng.so:graphics/png
 USES+=		jpeg
