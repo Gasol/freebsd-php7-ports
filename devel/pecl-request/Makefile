@@ -12,6 +12,6 @@ LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE.md
 
 USES=		php:pecl
-IGNORE_WITH_PHP=	72 73 74
+IGNORE_WITH_PHP=	72 73 74 80 81
 
 .include <bsd.port.mk>
