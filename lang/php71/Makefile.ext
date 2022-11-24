@@ -92,12 +92,13 @@ USES+=		ssl
 .endif
 
 .if ${PHP_MODNAME} == "gd"
+BUILD_DEPENDS=	pkg-config:devel/pkgconf
 LIB_DEPENDS=	libfreetype.so:print/freetype2 \
 		libpng.so:graphics/png
 USES+=		jpeg
 
 CONFIGURE_ARGS+=--with-gd=${LOCALBASE} \
-		--with-freetype-dir=${LOCALBASE} \
+		--enable-freetype \
 		--with-jpeg-dir=${LOCALBASE} \
 		--with-png-dir=${LOCALBASE} \
 		--with-zlib-dir=/usr
