@@ -16,7 +16,7 @@ EXPIRATION_DATE=	2018-12-04
 
 LICENSE=	PHP301
 
-USES+=		tar:xz cpe
+USES+=		cpe gnome tar:xz
 CPE_PRODUCT=	php
 NO_OPTIONS_SORT=yes
 .if !defined(PKGNAMESUFFIX)
