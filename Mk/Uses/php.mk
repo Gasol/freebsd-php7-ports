@@ -110,7 +110,7 @@ DIST_SUBDIR=	PECL
 
 PHPBASE?=	${LOCALBASE}
 
-_ALL_PHP_VERSIONS=	72 74 80 81 82
+_ALL_PHP_VERSIONS=	71 72 74 80 81 82
 
 # Make the already installed PHP the default one.
 .  if exists(${PHPBASE}/etc/php.conf)
@@ -197,6 +197,9 @@ PHP_EXT_DIR=   20190902
 PHP_EXT_INC=    hash pcre spl
 .		 elif ${PHP_VER} == 72
 PHP_EXT_DIR=   20170718
+PHP_EXT_INC=    pcre spl
+.    elif ${PHP_VER} == 71
+PHP_EXT_DIR=   20160303
 PHP_EXT_INC=    pcre spl
 .    else
 # (rene) default to DEFAULT_VERSIONS
@@ -394,7 +397,8 @@ _USE_PHP_ALL=	bcmath bitset bz2 calendar ctype curl dba dom \
 		soap sockets sodium spl sqlite3 sysvmsg sysvsem sysvshm \
 		tidy tokenizer xml xmlreader xmlrpc xmlwriter xsl zip zlib
 # version specific components
-_USE_PHP_VER72=	${_USE_PHP_ALL} interbase pdf recode sodium xmlrpc wddx
+_USE_PHP_VER71=	${_USE_PHP_ALL} interbase recode wddx
+_USE_PHP_VER72=	${_USE_PHP_ALL} interbase pdf recode wddx
 _USE_PHP_VER74=	${_USE_PHP_ALL} pdf zephir_parser
 _USE_PHP_VER80=	${_USE_PHP_ALL} zephir_parser
 _USE_PHP_VER81=	${_USE_PHP_ALL} zephir_parser
@@ -429,7 +433,11 @@ json_DEPENDS=	devel/php${PHP_VER}-json
 .    endif
 ldap_DEPENDS=	net/php${PHP_VER}-ldap
 mbstring_DEPENDS=	converters/php${PHP_VER}-mbstring
+.    if ${PHP_VER} >= 72
 mcrypt_DEPENDS=	security/pecl-mcrypt@${PHP_FLAVOR}
+.    else
+mcrypt_DEPENDS=	security/php${PHP_VER}-mcrypt
+.    endif
 memcache_DEPENDS=	databases/pecl-memcache@${PHP_FLAVOR}
 memcached_DEPENDS=	databases/pecl-memcached@${PHP_FLAVOR}
 mssql_DEPENDS=	databases/php${PHP_VER}-mssql
