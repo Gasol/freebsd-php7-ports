@@ -394,7 +394,7 @@ _USE_PHP_ALL=	bcmath bitset bz2 calendar ctype curl dba dom \
 		soap sockets sodium spl sqlite3 sysvmsg sysvsem sysvshm \
 		tidy tokenizer xml xmlreader xmlrpc xmlwriter xsl zip zlib
 # version specific components
-_USE_PHP_VER72=	${_USE_PHP_ALL}
+_USE_PHP_VER72=	${_USE_PHP_ALL} interbase pdf recode sodium xmlrpc wddx
 _USE_PHP_VER74=	${_USE_PHP_ALL} pdf zephir_parser
 _USE_PHP_VER80=	${_USE_PHP_ALL} zephir_parser
 _USE_PHP_VER81=	${_USE_PHP_ALL} zephir_parser
