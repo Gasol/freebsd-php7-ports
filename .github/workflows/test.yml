@@ -57,7 +57,7 @@ jobs:
             ls -al /usr/ports
             ls -al "$GITHUB_WORKSPACE"
             pkg install -y poudriere-devel
-            DISTFILES_CACHE=$(sed -ne '/^DISTFILES_CACHE=/s/DISTFILES_CACHE=//p' /usr/local/etc/poudriere.conf)
+            DISTFILES_CACHE=`sed -ne '/^DISTFILES_CACHE=/s/DISTFILES_CACHE=//p' /usr/local/etc/poudriere.conf`
             echo "DISTFILES_CACHE=$DISTFILES_CACHE"
             mkdir -v -p ${DISTFILES_CACHE:-/usr/ports/distfiles}
             poudriere ports -c -p default -m null -M /usr/ports
