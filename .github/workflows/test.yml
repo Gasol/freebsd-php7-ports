@@ -50,7 +50,9 @@ jobs:
           sync: rsync
           release: ${{ matrix.version }}
           prepare: |
+            echo "::group::portsnap fetch extract"
             portsnap --interactive fetch extract
+            echo "::endgroup::"
             rm /usr/ports/MOVED
             ls -al /usr/ports
             ls -al "$GITHUB_WORKSPACE"
