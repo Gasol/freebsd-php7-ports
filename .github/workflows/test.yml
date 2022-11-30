@@ -38,7 +38,7 @@ jobs:
         run: |
           ORIGINS=$(for file in ${{ steps.changed-files-dir-names.outputs.all_modified_files }}; do \
             if [ -d "$file" ]; then \
-              echo $file \
+              echo $file; \
             fi \
           done)
           echo "origins=$ORIGINS" >>"$GITHUB_OUTPUT"
