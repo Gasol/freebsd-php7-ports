@@ -46,7 +46,7 @@ jobs:
       - name: Build changed origins
         uses: vmactions/freebsd-vm@v0
         with:
-          usesh: true
+          usesh: "true"
           sync: rsync
           release: ${{ matrix.version }}
           prepare: |
