@@ -54,16 +54,15 @@ jobs:
             portsnap --interactive fetch extract
             echo "::endgroup::"
             rm /usr/ports/MOVED
-            ls -al /usr/ports
-            ls -al "$GITHUB_WORKSPACE"
             pkg install -y poudriere-devel
             set DISTFILES_CACHE=`sed -ne '/^DISTFILES_CACHE=/s/DISTFILES_CACHE=//p' /usr/local/etc/poudriere.conf`
             if ( "$DISTFILES_CACHE" == "" ) set DISTFILES_CACHE=/usr/ports/distfiles endif
             echo "::debug:: DISTFILES_CACHE is set to $DISTFILES_CACHE"
-            mkdir -v -p $DISTFILES_CACHE
+            mkdir -p $DISTFILES_CACHE
             poudriere ports -c -p default -m null -M /usr/ports
             poudriere ports -c -p overlay -m null -M "$GITHUB_WORKSPACE"
             poudriere ports -l
-          run: |
+            echo "::group::Creating a jail in FreeBSD ${{ matrix.version }}"
             poudriere jail -c -j builder -v ${{ matrix.version }}-RELEASE
-            poudriere bulk -j builder -p default -O overlay -o ${{ steps.collect-changed-origins.outputs.origins }}
+            echo "::endgroup::"
+          run: poudriere bulk -j builder -p default -O overlay ${{ steps.collect-changed-origins.outputs.origins }}
