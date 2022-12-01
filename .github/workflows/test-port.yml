@@ -32,17 +32,7 @@ jobs:
             .github
             Mk/Uses
 
-      - name: Collect changed origins
-        id: collect-changed-origins
-        run: |
-          ORIGINS=$(for file in ${{ steps.changed-files-dir-names.outputs.all_modified_files }}; do \
-            if [ -d "$file" -a -n "$(make -C $file -V PKGNAME)" ]; then \
-              echo $file; \
-            fi \
-          done | xargs)
-          echo "origins=$ORIGINS" >>"$GITHUB_OUTPUT"
-
-      - name: Build changed origins
+      - name: Build changed ports
         uses: Gasol/freebsd-vm@boolean-input
         with:
           usesh: true
@@ -63,4 +53,9 @@ jobs:
             echo "::group::Creating a jail in FreeBSD ${{ matrix.version }}"
             poudriere jail -c -j builder -v ${{ matrix.version }}-RELEASE
             echo "::endgroup::"
-          run: poudriere bulk -j builder -b latest -p default -O overlay ${{ steps.collect-changed-origins.outputs.origins }}
+            export ORIGINS=$(for file in ${{ steps.changed-files-dir-names.outputs.all_modified_files }}; do \
+              if [ -d "$file" -a -n "$(make -C $file -V PKGNAME)" ]; then \
+                echo $file; \
+              fi \
+            done | xargs)
+          run: poudriere bulk -j builder -b latest -p default -O overlay $ORIGINS
