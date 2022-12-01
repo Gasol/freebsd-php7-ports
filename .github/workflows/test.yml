@@ -30,7 +30,7 @@ jobs:
           files_ignore: |
             .git
             .github
-            Mk/Uses/php.mk
+            Mk/Uses
 
       - name: Collect changed origins
         id: collect-changed-origins
