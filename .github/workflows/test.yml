@@ -45,7 +45,7 @@ jobs:
       - name: Build changed origins
         uses: vmactions/freebsd-vm@v0
         with:
-          usesh: true // Not working for now, So we should write command in csh by default.
+          usesh: true # Not working for now, So we should write command in csh by default.
           sync: rsync
           release: ${{ matrix.version }}
           prepare: |
