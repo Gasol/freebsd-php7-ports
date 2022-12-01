@@ -39,7 +39,7 @@ jobs:
             if [ -d "$file" ]; then \
               echo $file; \
             fi \
-          done)
+          done | xargs)
           echo "origins=$ORIGINS" >>"$GITHUB_OUTPUT"
 
       - name: Build changed origins
