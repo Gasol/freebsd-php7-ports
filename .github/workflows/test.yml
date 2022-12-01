@@ -36,7 +36,7 @@ jobs:
         id: collect-changed-origins
         run: |
           ORIGINS=$(for file in ${{ steps.changed-files-dir-names.outputs.all_modified_files }}; do \
-            if [ -d "$file" ]; then \
+            if [ -d "$file" -a -n "$(make -C $file -V PKGNAME)" ]; then \
               echo $file; \
             fi \
           done | xargs)
