@@ -43,7 +43,7 @@ jobs:
           echo "origins=$ORIGINS" >>"$GITHUB_OUTPUT"
 
       - name: Build changed origins
-        uses: vmactions/freebsd-vm@v0
+        uses: Gasol/freebsd-vm@v0.3.1-test
         with:
           usesh: true # Not working for now, So we should write command in csh by default.
           sync: rsync
