@@ -43,7 +43,7 @@ jobs:
           echo "origins=$ORIGINS" >>"$GITHUB_OUTPUT"
 
       - name: Build changed origins
-        uses: Gasol/freebsd-vm@v0.3.1-test
+        uses: Gasol/freebsd-vm@boolean-input
         with:
           usesh: true
           sync: rsync
