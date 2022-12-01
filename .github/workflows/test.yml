@@ -54,10 +54,9 @@ jobs:
             echo "::endgroup::"
             rm /usr/ports/MOVED
             pkg install -y poudriere-devel
-            set DISTFILES_CACHE=`sed -ne '/^DISTFILES_CACHE=/s/DISTFILES_CACHE=//p' /usr/local/etc/poudriere.conf`
-            if ( "$DISTFILES_CACHE" == "" ) set DISTFILES_CACHE=/usr/ports/distfiles endif
+            DISTFILES_CACHE=`sed -ne '/^DISTFILES_CACHE=/s/DISTFILES_CACHE=//p' /usr/local/etc/poudriere.conf`
             echo "::debug:: DISTFILES_CACHE is set to $DISTFILES_CACHE"
-            mkdir -p $DISTFILES_CACHE
+            mkdir -p ${DISTFILES_CACHE:-/usr/ports/distfiles}
             poudriere ports -c -p default -m null -M /usr/ports
             poudriere ports -c -p overlay -m null -M "$GITHUB_WORKSPACE"
             poudriere ports -l
