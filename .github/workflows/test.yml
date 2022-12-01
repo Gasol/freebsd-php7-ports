@@ -63,4 +63,4 @@ jobs:
             echo "::group::Creating a jail in FreeBSD ${{ matrix.version }}"
             poudriere jail -c -j builder -v ${{ matrix.version }}-RELEASE
             echo "::endgroup::"
-          run: poudriere bulk -j builder -p default -O overlay ${{ steps.collect-changed-origins.outputs.origins }}
+          run: poudriere bulk -j builder -b latest -p default -O overlay ${{ steps.collect-changed-origins.outputs.origins }}
