@@ -54,7 +54,7 @@ jobs:
             poudriere jail -c -j builder -v ${{ matrix.version }}-RELEASE
             echo "::endgroup::"
             export ORIGINS=$(for file in ${{ steps.changed-files-dir-names.outputs.all_modified_files }}; do \
-              if [ -d "$file" -a -n "$(make -C $file -V PKGNAME)" ]; then \
+              if [ -d "$file" -a -n "$(make -C $GITHUB_WORKSPACE/$file -V PKGNAME)" ]; then \
                 echo $file; \
               fi \
             done | xargs)
