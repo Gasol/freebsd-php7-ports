@@ -6,7 +6,7 @@ MASTER_SITES=	PHP
 DISTNAME=	php-${DISTVERSION}
 DIST_SUBDIR=	php
 
-MAINTAINER=	tz@FreeBSD.org
+MAINTAINER=	gasol.wu@gmail.com
 COMMENT=	PHP Scripting Language
 
 LICENSE=	PHP301

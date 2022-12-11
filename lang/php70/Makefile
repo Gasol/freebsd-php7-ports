@@ -8,7 +8,7 @@ CATEGORIES?=	lang devel www
 MASTER_SITES=	PHP/distributions
 DISTNAME=	php-${PORTVERSION}
 
-MAINTAINER=	tz@FreeBSD.org
+MAINTAINER=	gasol.wu@gmail.com
 COMMENT=	PHP Scripting Language
 
 DEPRECATED=	Security Support ends on 3 Dec 2018

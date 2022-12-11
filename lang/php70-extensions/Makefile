@@ -6,7 +6,7 @@ PORTVERSION=	1.1
 CATEGORIES=	lang
 PKGNAMESUFFIX=	-extensions
 
-MAINTAINER=	tz@FreeBSD.org
+MAINTAINER=	gasol.wu@gmail.com
 COMMENT=	"meta-port" to install PHP extensions
 
 DEPRECATED=	Works only with EOL php 7.0
