@@ -20,3 +20,14 @@ SUBDIR+=	www
 PORTSTOP=	yes
 
 .include <bsd.port.subdir.mk>
+
+list-all-origins:
+	@for c in ${SUBDIR}; do \
+		for p in $$(${MAKE} -C $$c -V SUBDIR); do \
+		  echo $$c/$$p; \
+		done \
+	done
+
+all-origins.txt:
+	@${ECHO_MSG} "Generating all-origins.txt"
+	@${MAKE} list-all-origins | sort > all-origins.txt
