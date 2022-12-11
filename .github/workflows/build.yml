@@ -1,16 +1,22 @@
 name: Build ports
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Build with specifying FreeBSD version
+        required: true
+        default: 13.1
+      branch:
+        description: Fetch binary packages from a repository branch
+        required: true
+        default: 'latest'
+        options:
+          - latest
+          - quarterly
 
 jobs:
   freebsd:
-    strategy:
-      matrix:
-        version: [ 13.1 ]
-
     runs-on: macos-12
     name: Test builds
     steps:
@@ -21,9 +27,9 @@ jobs:
       - name: Build changed ports
         uses: Gasol/freebsd-vm@boolean-input
         with:
-          usesh: true
+          usesh: truef
           sync: rsync
-          release: ${{ matrix.version }}
+          release: ${{ inputs.version }}
           prepare: |
             echo "::group::portsnap fetch extract"
             portsnap --interactive fetch extract
@@ -36,8 +42,8 @@ jobs:
             poudriere ports -c -p default -m null -M /usr/ports
             poudriere ports -c -p overlay -m null -M "$GITHUB_WORKSPACE"
             poudriere ports -l
-            echo "::group::Creating a jail in FreeBSD ${{ matrix.version }}"
-            poudriere jail -c -j builder -v ${{ matrix.version }}-RELEASE
+            echo "::group::Creating a jail in FreeBSD ${{ inputs.version }}"
+            poudriere jail -c -j builder -v ${{ inputs.version }}-RELEASE
             echo "::endgroup::"
           run: |
             make all-origins.txt
