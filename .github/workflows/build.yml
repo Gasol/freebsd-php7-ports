@@ -29,7 +29,7 @@ jobs:
       - name: Build changed ports
         uses: Gasol/freebsd-vm@boolean-input
         with:
-          usesh: truef
+          usesh: true
           sync: rsync
           release: ${{ inputs.version }}
           prepare: |
