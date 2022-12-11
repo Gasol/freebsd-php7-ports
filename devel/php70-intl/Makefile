@@ -1,7 +1,7 @@
 # Created by: Alex Dupre <ale@FreeBSD.org>
 # $FreeBSD: head/devel/php70-intl/Makefile 482830 2018-10-23 11:35:03Z jbeich $
 
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	devel
 
 MASTERDIR=	${.CURDIR}/../../lang/php70

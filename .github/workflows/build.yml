@@ -1,0 +1,53 @@
+name: Build ports
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Build with specifying FreeBSD version
+        required: true
+        type: string
+        default: 13.1
+      branch:
+        description: Fetch binary packages from a repository branch
+        required: true
+        type: choice
+        default: 'latest'
+        options:
+          - latest
+          - quarterly
+
+jobs:
+  freebsd:
+    runs-on: macos-12
+    name: Test builds
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Build changed ports
+        uses: Gasol/freebsd-vm@boolean-input
+        with:
+          usesh: true
+          sync: rsync
+          release: ${{ inputs.version }}
+          prepare: |
+            echo "::group::portsnap fetch extract"
+            portsnap --interactive fetch extract
+            echo "::endgroup::"
+            rm /usr/ports/MOVED
+            pkg install -y poudriere-devel
+            DISTFILES_CACHE=`sed -ne '/^DISTFILES_CACHE=/s/DISTFILES_CACHE=//p' /usr/local/etc/poudriere.conf`
+            echo "::debug::DISTFILES_CACHE is set to $DISTFILES_CACHE"
+            mkdir -p ${DISTFILES_CACHE:-/usr/ports/distfiles}
+            poudriere ports -c -p default -m null -M /usr/ports
+            poudriere ports -c -p overlay -m null -M "$GITHUB_WORKSPACE"
+            poudriere ports -l
+            echo "::group::Creating a jail in FreeBSD ${{ inputs.version }}"
+            poudriere jail -c -j builder -v ${{ inputs.version }}-RELEASE
+            echo "::endgroup::"
+          run: |
+            make all-origins.txt
+            poudriere bulk -j builder -b latest -p default -O overlay -f ./all-origins.txt
+            ls -al /usr/local/poudriere/data/packages/builder-default/

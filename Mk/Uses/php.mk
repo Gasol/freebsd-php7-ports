@@ -57,7 +57,7 @@
 
 .if !defined(_INCLUDE_USES_PHP_MK)
 
-PHP_Include_MAINTAINER=	ale@FreeBSD.org
+PHP_Include_MAINTAINER=	gasol.wu@gmail.com
 
 _INCLUDE_USES_PHP_MK=	yes
 
@@ -519,3 +519,4 @@ check-makevars::
 .    endfor
 .  endif
 .endif
+

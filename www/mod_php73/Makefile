@@ -1,7 +1,7 @@
 CATEGORIES=	www devel
 PKGNAMEPREFIX=	mod_
 
-MAINTAINER=	ports@FreeBSD.org
+MAINTAINER=	gasol.wu@gmail.com
 
 PHP_PORT=	lang/php73
 MASTERDIR=	${.CURDIR}/../../${PHP_PORT}
