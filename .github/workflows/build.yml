@@ -6,10 +6,12 @@ on:
       version:
         description: Build with specifying FreeBSD version
         required: true
+        type: string
         default: 13.1
       branch:
         description: Fetch binary packages from a repository branch
         required: true
+        type: choice
         default: 'latest'
         options:
           - latest
